@@ -1,12 +1,12 @@
 import javax.swing.*;
 import java.awt.*;
 import java.util.Random;
-class JPanelExample extends JFrame
+class Interface extends JFrame
 {
 JPanel p1,p2;
 Dimension d;
 
-    public JPanelExample()
+    public Interface()
     {
         createAndShowGUI();
     }
@@ -37,40 +37,31 @@ Dimension d;
     {
         setTitle("JPanel Example in Java");
         setDefaultCloseOperation(EXIT_ON_CLOSE);
-        setLayout(new GridLayout(15,15)); //FILA / COLUMNAS
-        
-        for (int i = 0; i<225; i++) {
-           
-           // An empty panel with FlowLayout
-           p1=new JPanel();
-           
-           // Panel with custom layout
-           //p2=new JPanel(new GridBagLayout());
-           
-           // Set some preferred size
-           d=new Dimension(40,40);
+        setLayout(new GridLayout(15,20)); //FILA / COLUMNAS
+        int bloque = 1;
 
-           p1.add(new JLabel(Integer.toString(i)));
-
-           p1.setPreferredSize(d);
-           //p2.setPreferredSize(d);
+        for (int i = 0; i<15; i++) {
            
-           // Set some background
-           p1.setBackground(RandomColor());
-           //p2.setBackground(Color.DARK_GRAY);
-
-           // Set some border
-           // Here a line border of 5 thickness, dark gray color and rounded
-           // edges
-           p1.setBorder(BorderFactory.createLineBorder(Color.BLACK,1,true));
+           for (int j=0; j<15; j++) {
+           		p1=new JPanel();
+	           	d=new Dimension(40,40);
+	           	p1.add(new JLabel(Integer.toString(bloque)));
+	           	p1.setPreferredSize(d);
+	           	p1.setBackground(RandomColor());
+	           	p1.setBorder(BorderFactory.createLineBorder(Color.BLACK,1,true));
+	           	add(p1);
+	           	bloque++;
+           }
+           for (int k=0; k<5; k++) {
+           		p1=new JPanel();
+	           	d=new Dimension(40,40);
+	           	p1.setPreferredSize(d);
+	           	add(p1);
+	           	JTextArea textArea = new JTextArea(5, 30);
+				JScrollPane scrollPane = new JScrollPane(textArea);
+				setLayout.add(scrollPane, BorderLayout.CENTER);
+           }
            
-           // Set some tooltip text
-           //p1.setToolTipText("Panel 1");
-           //p2.setToolTipText("Panel 2");
-           
-           // Add panels
-           add(p1);
-           //add(p2);
         }
         //setSize(15,15);
         setVisible(true);
@@ -83,6 +74,6 @@ Dimension d;
     
     public static void main(String args[])
     {
-        new JPanelExample();
+        new Interface();
     }
 }
