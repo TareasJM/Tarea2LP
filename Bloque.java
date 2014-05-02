@@ -1,9 +1,6 @@
 public class Bloque{
-	private AbstractCreator ac;
 
-	public Bloque(AbstractCreator ac){
-		this.ac = ac;
+	public void DestruirBloque(){
+		//destruir
 	}
-
-	public DestruirBloque();
 }

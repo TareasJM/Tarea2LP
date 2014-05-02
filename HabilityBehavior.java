@@ -1,5 +1,5 @@
 public interface HabilityBehavior{
 
-	public void Hability();
+	public void Hability(int x);
 
 }

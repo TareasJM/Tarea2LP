@@ -1,10 +1,8 @@
-import java.util.Random;
 public class ColorCreator extends AbstractCreator{
 
-	public BLoque CrearBloque(){
-		//Crea Color
-		Bloque bloque = new Bloque();
-		
+	public Bloque crearBloque(){
+		System.out.println("ColorCreator");
+		return new Bloque();
 	}
 
 }

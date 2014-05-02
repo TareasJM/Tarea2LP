@@ -1,7 +1,9 @@
 public class ComodinCreator extends AbstractCreator{
 
-	public BLoque CrearBloque(){
-		//Crea Comodin
+	public Bloque crearBloque(){
+		System.out.println("ColorCreator");
+		return new Bloque();
+
 	}
 
 }
