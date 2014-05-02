@@ -1,7 +1,8 @@
-public class HabilityT2 extends HabilityBehavior{
+public class HabilityT2 implements HabilityBehavior{
 
-	public void Hability(){
-		//Destruye columna
+	public void Hability(int x){
+		System.out.println("Habilidad2");
+		//destroyCol(x);
 	}
 
 }
