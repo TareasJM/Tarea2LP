@@ -1,4 +1,4 @@
-public Interface AbstractCreator{
+public abstract class AbstractCreator{
 
-	public Bloque crearBloque();
+	public abstract Bloque crearBloque();
 }
