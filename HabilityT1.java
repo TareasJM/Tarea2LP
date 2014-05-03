@@ -1,7 +1,7 @@
 public class HabilityT1 implements HabilityBehavior{
 
-	public void Hability(int x){
-		System.out.println("Habilidad1");
+	public int Hability(){
+		return 1;
 		//destroyRow(x);
 	}
 

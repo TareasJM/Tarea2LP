@@ -27,4 +27,9 @@ public class BloqueColor extends Bloque{
 		return this.color;
 	}
 
+	public int DestruirBloque(){
+		this.color = "*";
+		return 0;
+	}
+
 }

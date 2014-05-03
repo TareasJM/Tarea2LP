@@ -1,6 +1,6 @@
 public class Bloque{
 
-	public void DestruirBloque(){
-		//destruir
+	public int DestruirBloque(){
+		return -1;
 	}
 }
