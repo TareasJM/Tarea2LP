@@ -1,7 +1,10 @@
+import java.io.Console;
 import java.util.Random;
 import java.util.Scanner;
 import java.awt.event.MouseEvent;
 import javax.swing.JPanel;
+import javax.swing.*;
+import java.awt.*;
 import java.awt.event.MouseAdapter;
 
 public class Board{
@@ -24,15 +27,10 @@ public class Board{
 		}
 		this.emptyBlocks = 225;
 		this.window = new Interface();
-		for(int i = 0; i < 225; i++)
-		{
-			// handleClick(window.colorBlock[i]);
-			handleClick(this.window.main);
-		}
-		handleClick(this.window.main);
 		this.row = this.col = -1;
 		this.painting = false;
 		this.time = 100;
+		handleClick(this.window.main, true);
 	}
 
 	public void setBlock(int row, int col, Bloque bloque){
@@ -56,11 +54,15 @@ public class Board{
 		return true;
 	}
 
+	public int[] getMeta(){
+		return this.meta;
+	}
+
 
 	public void showBoard(int clear){
 		painting = true;
 		this.window.updateBoard(this);
-		this.window.showBoard(0);
+		this.window.showBoard();
 		
 		if (clear > 0) {
 			System.out.print("\033[H\033[2J");
@@ -428,53 +430,87 @@ public class Board{
 		return destroyed;
 	}
 
-	public void handleClick(JPanel i){
-    	final JPanel y = i;
+	public void handleClick(JPanel i, boolean add)
+	{
     	final Board b = this;
-        i.addMouseListener(new MouseAdapter(){   
+    	final JPanel y = i;
 
-            @Override
-            public void mouseClicked(MouseEvent e) {
+    	if (add)
+    	{
+    		i.addMouseListener(new MouseAdapter()
+    		{   
 
-                if(painting == false){
-                	e.translatePoint(e.getComponent().getLocation().x, e.getComponent().getLocation().y);
-                    int newCol = e.getX()/40;
-                    int newRow = e.getY()/40;
-                    System.out.println(newRow+"-"+newCol);
-                    System.out.println(y.getLocation());
-                    if((Math.abs(newCol-col) == 1 && newRow == row) || (Math.abs(newRow-row) == 1 && newCol == col)){
-                        System.out.println("entro");
-                    	moveBlock(row,col,newRow,newCol);
-                    	row = col = -1;
-                    }
-                    else{
-                    	row = newRow;
-                    	col = newCol;
-                    }
-                }
-             }
+	            public void mouseClicked(MouseEvent e) 
+	            {
 
-        });
+	                if(painting == false)
+	                {
+	                	// e.translatePoint(e.getComponent().getLocation().x, e.getComponent().getLocation().y);
+	                 
+	                 	final Point pos = e.getPoint();
+	                	System.out.println(""+pos.x+"-"+pos.y);
+	                	// return ola;
+	                }
+	                // return null;
+	             }
+
+	        });
+	       // return chao;
+	    }
+		else
+		{
+			i.removeMouseListener(i.getMouseListeners()[0]);		
+			// return null;
+		}
     }
 
+
+
 	public static void main(String[] args){
-		Scanner keyboard = new Scanner(System.in);
+		// Scanner keyboard = new Scanner(System.in);
 
 		// System.out.println("Ingrese un numero bloques:");
 		// String[] c = keyboard.nextLine().split(" ");
 		// int[] meta = {Integer.parseInt(c[0]),Integer.parseInt(c[1]),Integer.parseInt(c[2]),Integer.parseInt(c[3]),Integer.parseInt(c[4])};
 		String[] c;
-		int[] meta = {100,100,100,100,100};
+		int[] meta = {9999,9999,9999,9999,9999};
 		Board board = new Board(meta);
+ 		board.time = 5;
 		board.fillBoard();
  		board.showBoard(1);
  		board.checkBoard();
- 		board.time = 60;
+ 		board.time = 100;
 		while(!board.getDone()){
 			System.out.println("Ingrese un movimiento:");
-			c = keyboard.nextLine().split(" ");
-			board.moveBlock(Integer.parseInt(c[0]),Integer.parseInt(c[1]),Integer.parseInt(c[2]),Integer.parseInt(c[3]));
+			Console cnsl = null;
+			String name = null;
+
+			try{
+			 // creates a console object
+			 cnsl = System.console();
+
+			 // if console is not null
+			 if (cnsl != null) {
+			    
+			    // read line from the user input
+			    c = cnsl.readLine().split("-");
+				int x1 = Integer.parseInt(c[0]);
+				int y1 = Integer.parseInt(c[1]);
+			    c = cnsl.readLine().split("-");
+				int x2 = Integer.parseInt(c[0]);
+				int y2 = Integer.parseInt(c[1]);
+			    
+				JOptionPane.showMessageDialog(null,x1+"-"+y1+" "+x2+"-"+y2);
+			    // prints
+			 }      
+			}catch(Exception ex){
+			 
+			 // if any error occurs
+			 ex.printStackTrace();      
+			}
 		}
-		keyboard.close();
+		// keyboard.close();
+		JOptionPane.showMessageDialog(null,"Ganaste");
+		board.window.close();
 	}
 }

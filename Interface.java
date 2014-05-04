@@ -1,16 +1,24 @@
 import javax.swing.*;
 import java.awt.*;
-import javax.swing.JPanel;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+
+
 
 class Interface extends JFrame
 {
-    JPanel main;
-    JPanel control;
-	JPanel[] colorBlock;
-	int row;
-	int col;
-	Board board;
-	boolean paiting;
+    public JPanel main;
+    public JPanel control;
+    public JPanel blockPuntaje;
+    public JLabel puntaje;
+	public JPanel[] colorBlock;
+    public JLabel[] meta;
+    public String[] puntaje2; 
+    public Color[] colores;
+	public int row;
+	public int col;
+	public Board board;
+	public boolean paiting;
 
     public Interface()
     {
@@ -29,16 +37,31 @@ class Interface extends JFrame
             colorBlock[i].setBackground(Color.WHITE);
             colorBlock[i].setBorder(BorderFactory.createLineBorder(Color.BLACK,1,true));
             colorBlock[i].setVisible(true);
+            // handleClick(colorBlock[i]);
             main.add(colorBlock[i]);
 
         }
+        this.meta = new JLabel[5];
+        this.puntaje2 = new String[] {"R: ","B: ","O: ","G: ","Y: "};
+        this.colores = new Color[] {Color.RED,Color.BLUE,Color.ORANGE,Color.GREEN,Color.YELLOW};
         add(main);
         this.control = new JPanel();
-        this.control.setLayout(new GridLayout(10,1));
-        this.control.setSize(600,100);
-        this.control.setBackground(Color.BLACK);
+        this.control.setLayout(new GridLayout(6,2));
+        this.control.setBackground(Color.WHITE);
         this.control.setVisible(true);
         add(control);
+        for (int i=0;i<5;i++ ) {
+            this.blockPuntaje = new JPanel();
+            this.blockPuntaje.setBackground(this.colores[i]);
+            this.blockPuntaje.setBorder(BorderFactory.createLineBorder(Color.BLACK,1,true));          
+            this.control.add(this.blockPuntaje);
+            meta[i] = new JLabel(puntaje2[i]+"");
+            this.blockPuntaje.add(meta[i]);
+        }
+        JTextField ola = new JTextField();
+        this.control.add(ola);
+
+
         pack();
         setVisible(true);
         paiting = false;
@@ -47,12 +70,12 @@ class Interface extends JFrame
     public void updateBoard(Board board)
     {
 
-        this.board = board;
-        showBoard(10);
+        this.board = board;   
+        showBoard();
 
     }
 
-    public void showBoard(int time)
+    public void showBoard()
     {   
         paiting = true;
     	int n = 0;
@@ -88,18 +111,19 @@ class Interface extends JFrame
         	}
         	doLayout();
         }
-        pack();
-
-        try{
-            Thread.sleep(time * 10);
-        }catch ( InterruptedException e){
-            System.out.print("No se puede esperar");
+        for (int i=0; i<5; i++) {
+            meta[i].setText(puntaje2[i]+board.getMeta()[i]);
         }
+        pack();
         paiting = false;
         
     }
+
+    public void close(){
+        this.dispose();
+    }
     
-/*    public void handleClick(JPanel panel)
+    public void handleClick(JPanel panel)
     {
         panel.addMouseListener(new MouseAdapter() 
         {   
@@ -108,22 +132,24 @@ class Interface extends JFrame
             public void mouseClicked(MouseEvent e) {
                 if(paiting == false)
                 {
-                	e.translatePoint(e.getComponent().getLocation().x, e.getComponent().getLocation().y);
-                    int newCol = e.getX()/40;
-                    int newRow = e.getY()/40;
-                    if((Math.abs(newCol-col) == 1 && newRow == row) || (Math.abs(newRow-row) == 1 && newCol == col)){
-                        System.out.println("entro");
-                    	board.moveBlock(row,col,newRow,newCol);
-                    	row = col = -1;
-                    }
-                    else{
-                    	row = newRow;
-                    	col = newCol;
-                    }
+                	// e.translatePoint(e.getComponent().getLocation().x, e.getComponent().getLocation().y);
+                 //    int newCol = e.getX()/40;
+                 //    int newRow = e.getY()/40;
+                 //    if((Math.abs(newCol-col) == 1 && newRow == row) || (Math.abs(newRow-row) == 1 && newCol == col)){
+                 //        System.out.println("entro");
+                 //    	board.moveBlock(row,col,newRow,newCol);
+                 //    	row = col = -1;
+                 //    }
+                 //    else{
+                 //    	row = newRow;
+                 //    	col = newCol;
+                 //    }
+                    System.out.println("click");
+                    return;
                 }
              }
 
         });
-    }*/
+    }       
     
 }
