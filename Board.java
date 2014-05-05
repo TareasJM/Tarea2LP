@@ -22,8 +22,8 @@ public class Board{
 	private int col,row;
 	private boolean painting;
 
-	public Board(int[] meta){
-		this.meta = meta;
+	public Board(){
+		this.meta = new int[] {0,0,0,0,0};
 		this.board = new Bloque[15][15]; //[y][x] -> [rows][cols]
 		for (int row=0; row<15; row++) {
 			for (int col=0; col<15; col++) {
@@ -34,7 +34,7 @@ public class Board{
 		this.window = new Interface();
 		this.row = this.col = -1;
 		this.painting = false;
-		this.time = 100;
+		this.time = 0;
 		handleClick(this.window.main, true);
 	}
 
@@ -63,6 +63,17 @@ public class Board{
 		return this.meta;
 	}
 
+	public void setMeta(int[] meta){
+		this.meta = meta;
+	}
+
+	public int getTime(){
+		return this.time;
+	}
+
+	public void setTime(int time){
+		this.time = time;
+	}
 
 	public void showBoard(int clear){
 		painting = true;
@@ -485,20 +496,15 @@ public class Board{
 
 
 	public static void main(String[] args){
-		// Scanner keyboard = new Scanner(System.in);
-
-		// System.out.println("Ingrese un numero bloques:");
-		// String[] c = keyboard.nextLine().split(" ");
-		// int[] meta = {Integer.parseInt(c[0]),Integer.parseInt(c[1]),Integer.parseInt(c[2]),Integer.parseInt(c[3]),Integer.parseInt(c[4])};
 		String[] click1;
 		String[] click2;
-		int[] meta = {9999,9999,9999,9999,9999};
-		Board board = new Board(meta);
- 		board.time = 5;
+		int[] meta = {100,100,100,100,100};
+		Board board = new Board();
 		board.fillBoard();
- 		board.showBoard(1);
  		board.checkBoard();
- 		board.time = 100;
+ 		board.setMeta(meta);
+ 		board.showBoard(1);
+ 		board.setTime(100);
 		while(!board.getDone()){
 			
 			if(!board.painting){
@@ -511,19 +517,7 @@ public class Board{
 					
 				}
 			}
-        // }
-			// Scanner sc = new Scanner(System.in);
-			// System.out.println("Ingrese un movimiento:");
-		 //    c = sc.nextLine().split("-");
-			// int x1 = Integer.parseInt(c[0]);
-			// int y1 = Integer.parseInt(c[1]);
-		 //    c = sc.nextLine().split("-");
-			// int x2 = Integer.parseInt(c[0]);
-			// int y2 = Integer.parseInt(c[1]);			    
-			// JOptionPane.showMessageDialog(null,x1+"-"+y1+" "+x2+"-"+y2);
-		
 		}
-		// keyboard.close();
 		JOptionPane.showMessageDialog(null,"Ganaste");
 		board.window.close();
 	}
