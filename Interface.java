@@ -46,7 +46,7 @@ class Interface extends JFrame
         this.colores = new Color[] {Color.RED,Color.BLUE,Color.ORANGE,Color.GREEN,Color.YELLOW};
         add(main);
         this.control = new JPanel();
-        this.control.setLayout(new GridLayout(6,2));
+        this.control.setLayout(new GridLayout(6,11));
         this.control.setBackground(Color.WHITE);
         this.control.setVisible(true);
         add(control);
@@ -58,8 +58,8 @@ class Interface extends JFrame
             meta[i] = new JLabel(puntaje2[i]+"");
             this.blockPuntaje.add(meta[i]);
         }
-        JTextField ola = new JTextField();
-        this.control.add(ola);
+        // JTextField ola = new JTextField();
+        // this.control.add(ola);
 
 
         pack();

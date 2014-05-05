@@ -6,6 +6,11 @@ import javax.swing.JPanel;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
+import java.io.IOException;
+import java.io.PipedInputStream;
+import java.io.PipedOutputStream;
+import java.io.PrintStream;
+
 
 public class Board{
 
@@ -64,40 +69,40 @@ public class Board{
 		this.window.updateBoard(this);
 		this.window.showBoard();
 		
-		if (clear > 0) {
-			System.out.print("\033[H\033[2J");
-			System.out.flush();
-		}else{
-			System.out.print("\n");
-		}
-		System.out.println("   0 1 2 3 4 5 6 7 8 9 0 1 2 3 4\n");
-		for (int row=0; row<15; row++) {
-			System.out.print(row%10+"  ");
-			for (int col=0; col<15; col++) {
+		// if (clear > 0) {
+		// 	System.out.print("\033[H\033[2J");
+		// 	System.out.flush();
+		// }else{
+		// 	System.out.print("\n");
+		// }
+		// System.out.println("   0 1 2 3 4 5 6 7 8 9 0 1 2 3 4\n");
+		// for (int row=0; row<15; row++) {
+		// 	System.out.print(row%10+"  ");
+		// 	for (int col=0; col<15; col++) {
 
-				Bloque temp = getBlock(row,col);
-				if (temp == null) {
-					System.out.print("  ");
-				}
-				else if( temp instanceof BloqueColor)
-				{
-					BloqueColor temp2 = (BloqueColor)temp;
-					System.out.print(temp2.getColor()+" ");
-				}
-				else if (temp instanceof BloqueComodin) 
-				{
-					System.out.print("& ");
-				}
-			}
-			System.out.println(" "+row%10);
-		}
-		System.out.println("\n   0 1 2 3 4 5 6 7 8 9 0 1 2 3 4");
+		// 		Bloque temp = getBlock(row,col);
+		// 		if (temp == null) {
+		// 			System.out.print("  ");
+		// 		}
+		// 		else if( temp instanceof BloqueColor)
+		// 		{
+		// 			BloqueColor temp2 = (BloqueColor)temp;
+		// 			System.out.print(temp2.getColor()+" ");
+		// 		}
+		// 		else if (temp instanceof BloqueComodin) 
+		// 		{
+		// 			System.out.print("& ");
+		// 		}
+		// 	}
+		// 	System.out.println(" "+row%10);
+		// }
+		// System.out.println("\n   0 1 2 3 4 5 6 7 8 9 0 1 2 3 4");
 
-		System.out.print("Te quedan R: "+this.meta[0]);
-		System.out.print(", B: "+this.meta[1]);
-		System.out.print(", O: "+this.meta[2]);
-		System.out.print(", G: "+this.meta[3]);
-		System.out.println(", Y: "+this.meta[4]);
+		// System.out.print("Te quedan R: "+this.meta[0]);
+		// System.out.print(", B: "+this.meta[1]);
+		// System.out.print(", O: "+this.meta[2]);
+		// System.out.print(", G: "+this.meta[3]);
+		// System.out.println(", Y: "+this.meta[4]);
 
 		try{
 			Thread.sleep(time);
@@ -150,9 +155,10 @@ public class Board{
 			setBlock(row, col, temp2);
 			setBlock(newRow, newCol, temp1);
 			showBoard(1);
-
 			int destroyed = checkBoard();
+
 			if (destroyed == 0) {
+
 				setBlock(row, col, temp1);
 				setBlock(newRow, newCol, temp2);
 				showBoard(1);
@@ -439,16 +445,15 @@ public class Board{
     	{
     		i.addMouseListener(new MouseAdapter()
     		{   
-
+    			@Override	
 	            public void mouseClicked(MouseEvent e) 
 	            {
 
 	                if(painting == false)
 	                {
-	                	// e.translatePoint(e.getComponent().getLocation().x, e.getComponent().getLocation().y);
+	                	e.translatePoint(e.getComponent().getLocation().x, e.getComponent().getLocation().y);
 	                 
-	                 	final Point pos = e.getPoint();
-	                	System.out.println(""+pos.x+"-"+pos.y);
+	                	System.out.println(""+e.getY()/30+"-"+e.getX()/30);
 	                	// return ola;
 	                }
 	                // return null;
@@ -464,6 +469,19 @@ public class Board{
 		}
     }
 
+ 	static String[] read() throws IOException{
+			
+
+        String c = "";
+        PipedOutputStream pipeOut = new PipedOutputStream();
+        PipedInputStream pipeIn = new PipedInputStream(pipeOut);
+        System.setOut(new PrintStream(pipeOut));
+        Scanner sc = new Scanner(pipeIn);
+
+        c = sc.nextLine();
+        return c.split("-");
+        
+    }
 
 
 	public static void main(String[] args){
@@ -472,7 +490,8 @@ public class Board{
 		// System.out.println("Ingrese un numero bloques:");
 		// String[] c = keyboard.nextLine().split(" ");
 		// int[] meta = {Integer.parseInt(c[0]),Integer.parseInt(c[1]),Integer.parseInt(c[2]),Integer.parseInt(c[3]),Integer.parseInt(c[4])};
-		String[] c;
+		String[] click1;
+		String[] click2;
 		int[] meta = {9999,9999,9999,9999,9999};
 		Board board = new Board(meta);
  		board.time = 5;
@@ -481,33 +500,28 @@ public class Board{
  		board.checkBoard();
  		board.time = 100;
 		while(!board.getDone()){
-			System.out.println("Ingrese un movimiento:");
-			Console cnsl = null;
-			String name = null;
-
-			try{
-			 // creates a console object
-			 cnsl = System.console();
-
-			 // if console is not null
-			 if (cnsl != null) {
-			    
-			    // read line from the user input
-			    c = cnsl.readLine().split("-");
-				int x1 = Integer.parseInt(c[0]);
-				int y1 = Integer.parseInt(c[1]);
-			    c = cnsl.readLine().split("-");
-				int x2 = Integer.parseInt(c[0]);
-				int y2 = Integer.parseInt(c[1]);
-			    
-				JOptionPane.showMessageDialog(null,x1+"-"+y1+" "+x2+"-"+y2);
-			    // prints
-			 }      
-			}catch(Exception ex){
-			 
-			 // if any error occurs
-			 ex.printStackTrace();      
+			
+			if(!board.painting){
+				try{
+					click1 = read();
+					click2 = read();
+					board.moveBlock(Integer.parseInt(click1[0]),Integer.parseInt(click1[1]),Integer.parseInt(click2[0]),Integer.parseInt(click2[1]));
+				}
+				catch(IOException e){
+					
+				}
 			}
+        // }
+			// Scanner sc = new Scanner(System.in);
+			// System.out.println("Ingrese un movimiento:");
+		 //    c = sc.nextLine().split("-");
+			// int x1 = Integer.parseInt(c[0]);
+			// int y1 = Integer.parseInt(c[1]);
+		 //    c = sc.nextLine().split("-");
+			// int x2 = Integer.parseInt(c[0]);
+			// int y2 = Integer.parseInt(c[1]);			    
+			// JOptionPane.showMessageDialog(null,x1+"-"+y1+" "+x2+"-"+y2);
+		
 		}
 		// keyboard.close();
 		JOptionPane.showMessageDialog(null,"Ganaste");
