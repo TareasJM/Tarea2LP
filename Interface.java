@@ -37,7 +37,6 @@ class Interface extends JFrame
             colorBlock[i].setBackground(Color.WHITE);
             colorBlock[i].setBorder(BorderFactory.createLineBorder(Color.BLACK,1,true));
             colorBlock[i].setVisible(true);
-            // handleClick(colorBlock[i]);
             main.add(colorBlock[i]);
 
         }
@@ -58,9 +57,6 @@ class Interface extends JFrame
             meta[i] = new JLabel(puntaje2[i]+"");
             this.blockPuntaje.add(meta[i]);
         }
-        // JTextField ola = new JTextField();
-        // this.control.add(ola);
-
 
         pack();
         setVisible(true);
@@ -121,35 +117,6 @@ class Interface extends JFrame
 
     public void close(){
         this.dispose();
-    }
-    
-    public void handleClick(JPanel panel)
-    {
-        panel.addMouseListener(new MouseAdapter() 
-        {   
-
-            @Override
-            public void mouseClicked(MouseEvent e) {
-                if(paiting == false)
-                {
-                	// e.translatePoint(e.getComponent().getLocation().x, e.getComponent().getLocation().y);
-                 //    int newCol = e.getX()/40;
-                 //    int newRow = e.getY()/40;
-                 //    if((Math.abs(newCol-col) == 1 && newRow == row) || (Math.abs(newRow-row) == 1 && newCol == col)){
-                 //        System.out.println("entro");
-                 //    	board.moveBlock(row,col,newRow,newCol);
-                 //    	row = col = -1;
-                 //    }
-                 //    else{
-                 //    	row = newRow;
-                 //    	col = newCol;
-                 //    }
-                    System.out.println("click");
-                    return;
-                }
-             }
-
-        });
-    }       
+    }     
     
 }
