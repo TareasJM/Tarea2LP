@@ -34,7 +34,7 @@ public class Board{
 		this.window = new Interface();
 		this.row = this.col = -1;
 		this.painting = false;
-		this.time = 100;
+		this.time = 0;
 		handleClick(this.window.main, true);
 	}
 
@@ -78,7 +78,7 @@ public class Board{
 	public void showBoard(int clear){
 		painting = true;
 		this.window.updateBoard(this);
-		this.window.showBoard();
+		// this.window.showBoard();
 		
 		// if (clear > 0) {
 		// 	System.out.print("\033[H\033[2J");
@@ -496,9 +496,17 @@ public class Board{
 
 
 	public static void main(String[] args){
-		String[] click1;
-		String[] click2;
+		String[] click;
+		int[] oldClick = new int[] {0,0};
 		int[] meta = {100,100,100,100,100};
+
+		if(args.length == 5)
+		{
+			for(int i=0; i < 5; i++)
+			{
+				meta[i] = Integer.parseInt(args[i]);
+			}
+		}
 		Board board = new Board();
 		board.fillBoard();
  		board.checkBoard();
@@ -506,19 +514,21 @@ public class Board{
  		board.showBoard(1);
  		board.setTime(100);
 		while(!board.getDone()){
-			
+
+	 		board.showBoard(1);
 			if(!board.painting){
 				try{
-					click1 = read();
-					click2 = read();
-					board.moveBlock(Integer.parseInt(click1[0]),Integer.parseInt(click1[1]),Integer.parseInt(click2[0]),Integer.parseInt(click2[1]));
+					click = read();
+					board.moveBlock(oldClick[0],oldClick[1],Integer.parseInt(click[0]),Integer.parseInt(click[1]));
+					oldClick[0] = Integer.parseInt(click[0]);
+					oldClick[1] = Integer.parseInt(click[1]);
 				}
 				catch(IOException e){
 					
 				}
 			}
 		}
-		JOptionPane.showMessageDialog(null,"Ganaste");
+		JOptionPane.showMessageDialog(null,"Ganaste CHANCHO CRASH");
 		board.window.close();
 	}
 }
