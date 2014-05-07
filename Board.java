@@ -21,6 +21,7 @@ public class Board{
 	private Interface window;
 	private int col,row;
 	private boolean painting;
+	private boolean initializing;
 
 	public Board(){
 		this.meta = new int[] {0,0,0,0,0};
@@ -36,6 +37,7 @@ public class Board{
 		this.painting = false;
 		this.time = 0;
 		handleClick(this.window.main, true);
+		this.initializing = true;
 	}
 
 	public boolean checkMoves()
@@ -174,51 +176,53 @@ public class Board{
 	}
 
 	public void showBoard(int clear){
-		painting = true;
-		this.window.updateBoard(this);
-		// this.window.showBoard();
-		
-		// if (clear > 0) {
-		// 	System.out.print("\033[H\033[2J");
-		// 	System.out.flush();
-		// }else{
-		// 	System.out.print("\n");
-		// }
-		// System.out.println("   0 1 2 3 4 5 6 7 8 9 0 1 2 3 4\n");
-		// for (int row=0; row<15; row++) {
-		// 	System.out.print(row%10+"  ");
-		// 	for (int col=0; col<15; col++) {
+		if(!this.initializing){
+			painting = true;
+			this.window.updateBoard(this);
+			// this.window.showBoard();
+			
+			// if (clear > 0) {
+			// 	System.out.print("\033[H\033[2J");
+			// 	System.out.flush();
+			// }else{
+			// 	System.out.print("\n");
+			// }
+			// System.out.println("   0 1 2 3 4 5 6 7 8 9 0 1 2 3 4\n");
+			// for (int row=0; row<15; row++) {
+			// 	System.out.print(row%10+"  ");
+			// 	for (int col=0; col<15; col++) {
 
-		// 		Bloque temp = getBlock(row,col);
-		// 		if (temp == null) {
-		// 			System.out.print("  ");
-		// 		}
-		// 		else if( temp instanceof BloqueColor)
-		// 		{
-		// 			BloqueColor temp2 = (BloqueColor)temp;
-		// 			System.out.print(temp2.getColor()+" ");
-		// 		}
-		// 		else if (temp instanceof BloqueComodin) 
-		// 		{
-		// 			System.out.print("& ");
-		// 		}
-		// 	}
-		// 	System.out.println(" "+row%10);
-		// }
-		// System.out.println("\n   0 1 2 3 4 5 6 7 8 9 0 1 2 3 4");
+			// 		Bloque temp = getBlock(row,col);
+			// 		if (temp == null) {
+			// 			System.out.print("  ");
+			// 		}
+			// 		else if( temp instanceof BloqueColor)
+			// 		{
+			// 			BloqueColor temp2 = (BloqueColor)temp;
+			// 			System.out.print(temp2.getColor()+" ");
+			// 		}
+			// 		else if (temp instanceof BloqueComodin) 
+			// 		{
+			// 			System.out.print("& ");
+			// 		}
+			// 	}
+			// 	System.out.println(" "+row%10);
+			// }
+			// System.out.println("\n   0 1 2 3 4 5 6 7 8 9 0 1 2 3 4");
 
-		// System.out.print("Te quedan R: "+this.meta[0]);
-		// System.out.print(", B: "+this.meta[1]);
-		// System.out.print(", O: "+this.meta[2]);
-		// System.out.print(", G: "+this.meta[3]);
-		// System.out.println(", Y: "+this.meta[4]);
+			// System.out.print("Te quedan R: "+this.meta[0]);
+			// System.out.print(", B: "+this.meta[1]);
+			// System.out.print(", O: "+this.meta[2]);
+			// System.out.print(", G: "+this.meta[3]);
+			// System.out.println(", Y: "+this.meta[4]);
 
-		try{
-			Thread.sleep(time);
-		}catch ( InterruptedException e){
-			System.out.print("No se puede esperar");
+			try{
+				Thread.sleep(time);
+			}catch ( InterruptedException e){
+				System.out.print("No se puede esperar");
+			}
+			painting = false;
 		}
-		painting = false;
 	}
 
 	public Bloque bloqueRandom(){
@@ -265,19 +269,18 @@ public class Board{
 			setBlock(newRow, newCol, temp1);
 			showBoard(1);
 
-			try {
-				java.applet.AudioClip clip =
-				java.applet.Applet.newAudioClip(
-				new java.net.URL("file:///home/jose/Google Drive/Usm/2014-1/LP/Tarea2LP/resources/test.wav"));
-				clip.play();
-			} catch (java.net.MalformedURLException murle) {
-				System.out.println(murle);
-			}
+			// try {
+			// 	java.applet.AudioClip bite =
+			// 	java.applet.Applet.newAudioClip(
+			// 	new java.net.URL("file:///home/jose/Google Drive/Usm/2014-1/LP/Tarea2LP/resources/bite.wav"));
+			// 	bite.play();
+			// } catch (java.net.MalformedURLException murle) {
+			// 	System.out.println(murle);
+			// }
 
 			int destroyed = checkBoard();
 
 			if (destroyed == 0) {
-
 				setBlock(row, col, temp1);
 				setBlock(newRow, newCol, temp2);
 				showBoard(1);
@@ -516,6 +519,16 @@ public class Board{
 			}
 		}
 		if (destroyed) {
+			if (!this.initializing) {
+				try {
+					java.applet.AudioClip bite =
+					java.applet.Applet.newAudioClip(
+					new java.net.URL("file:///home/jose/Google Drive/Usm/2014-1/LP/Tarea2LP/resources/bite.wav"));
+					bite.play();
+				} catch (java.net.MalformedURLException murle) {
+					System.out.println(murle);
+				}
+			}
 			showBoard(1);
 			fillBoard();
 		}
@@ -619,6 +632,7 @@ public class Board{
 		board.fillBoard();
  		board.checkBoard();
  		board.setMeta(meta);
+ 		board.initializing = false;
  		board.showBoard(1);
  		board.setTime(100);
 		while(!board.getDone()){
