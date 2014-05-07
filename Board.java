@@ -78,7 +78,7 @@ public class Board{
 
 				if(temp instanceof BloqueColor && tempc1 instanceof BloqueColor && tempc2 instanceof BloqueColor)
 				{
-					BloqueColor temp2 = (BloqueCol|or)temp;
+					BloqueColor temp2 = (BloqueColor)temp;
 					BloqueColor temp3 = (BloqueColor)tempc1;
 					BloqueColor temp4 = (BloqueColor)tempc2;	
 
