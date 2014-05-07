@@ -78,7 +78,7 @@ public class Board{
 
 				if(temp instanceof BloqueColor && tempc1 instanceof BloqueColor && tempc2 instanceof BloqueColor)
 				{
-					BloqueColor temp2 = (BloqueCol|or)temp;
+					BloqueColor temp2 = (BloqueColor)temp;
 					BloqueColor temp3 = (BloqueColor)tempc1;
 					BloqueColor temp4 = (BloqueColor)tempc2;	
 
@@ -701,7 +701,7 @@ public class Board{
 				try {
 					java.applet.AudioClip bite =
 					java.applet.Applet.newAudioClip(
-					new java.net.URL("file:///home/jose/Google Drive/Usm/2014-1/LP/Tarea2LP/resources/bite.wav"));
+					new java.net.URL("file:///home/salinas/Documents/USM/Tareas/LP2/Tarea2LP2/resources/bite.wav"));
 					bite.play();
 				} catch (java.net.MalformedURLException murle) {
 					System.out.println(murle);
@@ -813,6 +813,7 @@ public class Board{
  		board.initializing = false;
  		board.showBoard(1);
  		board.setTime(100);
+ 		board.showBoard(1);
 		while(!board.getDone()){
 
 	 		board.showBoard(1);
