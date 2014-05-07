@@ -40,30 +40,17 @@ public class Board{
 
 	public boolean checkMoves()
 	{
-		for(int row = 0; row < 13; row++)
+		for(int row = 0; row < 15; row++)
 		{
 
 			for(int col = 0; col < 13; col ++)
 			{
 
 				Bloque temp = getBlock(row,col);
-				Bloque tempr1 = getBlock(row+1,col);
-				Bloque tempr2 = getBlock(row+2,col);
 				Bloque tempc1 = getBlock(row,col+1);
 				Bloque tempc2 = getBlock(row,col+2);
 
-				if( temp instanceof BloqueColor && tempr1 instanceof BloqueColor && tempr2 instanceof BloqueColor)
-				{
-					BloqueColor temp2 = (BloqueColor)temp;
-					BloqueColor temp3 = (BloqueColor)tempr1;
-					BloqueColor temp4 = (BloqueColor)tempr2;
-				
-					if( temp2.getColor().equals(temp3.getColor()) && temp2.getColor().equals(temp4.getColor()))
-						{
-							return true;
-						}
-				}
-				else if(temp instanceof BloqueColor && tempc1 instanceof BloqueColor && tempc2 instanceof BloqueColor)
+				if(temp instanceof BloqueColor && tempc1 instanceof BloqueColor && tempc2 instanceof BloqueColor)
 				{
 					BloqueColor temp2 = (BloqueColor)temp;
 					BloqueColor temp3 = (BloqueColor)tempc1;
@@ -77,9 +64,9 @@ public class Board{
 			}
 		}
 
-		for(int row = 0; row < 13; row++)
+		for(int col = 0; col < 15; col++)
 		{	
-			for(int col = 13; col < 15; col++)
+			for(int row = 0; row < 13; row++)
 			{	
 				Bloque temp = getBlock(row,col);
 				Bloque tempr1 = getBlock(row+1,col);
@@ -98,46 +85,8 @@ public class Board{
 				}
 			}
 		}
-
-		for(int col = 0; col < 13; col++)
-		{	
-			for(int row = 13; row < 15; row++)
-			{	
-				Bloque temp = getBlock(row,col);
-				Bloque tempr1 = getBlock(row,col+1);
-				Bloque tempr2 = getBlock(row,col+2);
-
-				if( temp instanceof BloqueColor && tempr1 instanceof BloqueColor && tempr2 instanceof BloqueColor)
-				{
-					BloqueColor temp2 = (BloqueColor)temp;
-					BloqueColor temp3 = (BloqueColor)tempr1;
-					BloqueColor temp4 = (BloqueColor)tempr2;
-				
-					if( temp2.getColor().equals(temp3.getColor()) && temp2.getColor().equals(temp4.getColor()))
-						{
-							return true;
-						}
-				}
-				if( (col == 13 && row == 14) )
-				{	
-					if(temp instanceof BloqueColor && tempr1 instanceof BloqueColor && tempr2 instanceof BloqueColor)
-					{
-
-						BloqueColor temp2 = (BloqueColor)temp;
-						BloqueColor temp3 = (BloqueColor)tempr1;
-						BloqueColor temp4 = (BloqueColor)tempr2;
-					
-						if( temp2.getColor().equals(temp3.getColor()) && temp2.getColor().equals(temp4.getColor()))
-							{
-								return true;
-							}
-						return false;
-					}
-				}
-			
-			}
-		}
 		return false;
+
 	}
 
 	public void setBlock(int row, int col, Bloque bloque){
