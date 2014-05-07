@@ -48,7 +48,31 @@ public class Board{
 
 				Bloque temp = getBlock(row,col);
 				Bloque tempc1 = getBlock(row,col+1);
-				Bloque tempc2 = getBlock(row,col+2);
+				Bloque tempc2 = getBlock(row+1,col+2);
+
+				if(temp instanceof BloqueColor && tempc1 instanceof BloqueColor && tempc2 instanceof BloqueColor)
+				{
+					BloqueColor temp2 = (BloqueColor)temp;
+					BloqueColor temp3 = (BloqueColor)tempc1;
+					BloqueColor temp4 = (BloqueColor)tempc2;	
+
+					if( temp2.getColor().equals(temp3.getColor()) && temp2.getColor().equals(temp4.getColor()))
+						{
+							return true;
+						}
+				}
+			}
+		}
+
+		for(int row = 0; row < 15; row++)
+		{
+
+			for(int col = 14; col < 1; col--)
+			{
+
+				Bloque temp = getBlock(row,col);
+				Bloque tempc1 = getBlock(row,col-1);
+				Bloque tempc2 = getBlock(row+1,col-2);
 
 				if(temp instanceof BloqueColor && tempc1 instanceof BloqueColor && tempc2 instanceof BloqueColor)
 				{
@@ -70,7 +94,30 @@ public class Board{
 			{	
 				Bloque temp = getBlock(row,col);
 				Bloque tempr1 = getBlock(row+1,col);
-				Bloque tempr2 = getBlock(row+2,col);
+				Bloque tempr2 = getBlock(row+2,col+1);
+
+				if( temp instanceof BloqueColor && tempr1 instanceof BloqueColor && tempr2 instanceof BloqueColor)
+				{
+					BloqueColor temp2 = (BloqueColor)temp;
+					BloqueColor temp3 = (BloqueColor)tempr1;
+					BloqueColor temp4 = (BloqueColor)tempr2;
+				
+					if( temp2.getColor().equals(temp3.getColor()) && temp2.getColor().equals(temp4.getColor()))
+						{
+							return true;
+						}
+				}
+			}
+		}
+
+
+		for(int col = 0; col < 15; col++)
+		{	
+			for(int row = 14; row < 1; row--)
+			{	
+				Bloque temp = getBlock(row,col);
+				Bloque tempr1 = getBlock(row-1,col);
+				Bloque tempr2 = getBlock(row-2,col+1);
 
 				if( temp instanceof BloqueColor && tempr1 instanceof BloqueColor && tempr2 instanceof BloqueColor)
 				{
