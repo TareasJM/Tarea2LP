@@ -354,53 +354,51 @@ public class Board{
 	}
 
 	public void showBoard(int clear){
-		if(!this.initializing){
-			painting = true;
-			this.window.updateBoard(this);
-			// this.window.showBoard();
-			
-			// if (clear > 0) {
-			// 	System.out.print("\033[H\033[2J");
-			// 	System.out.flush();
-			// }else{
-			// 	System.out.print("\n");
-			// }
-			// System.out.println("   0 1 2 3 4 5 6 7 8 9 0 1 2 3 4\n");
-			// for (int row=0; row<15; row++) {
-			// 	System.out.print(row%10+"  ");
-			// 	for (int col=0; col<15; col++) {
+		painting = true;
+		this.window.updateBoard(this);
+		// this.window.showBoard();
+		
+		// if (clear > 0) {
+		// 	System.out.print("\033[H\033[2J");
+		// 	System.out.flush();
+		// }else{
+		// 	System.out.print("\n");
+		// }
+		// System.out.println("   0 1 2 3 4 5 6 7 8 9 0 1 2 3 4\n");
+		// for (int row=0; row<15; row++) {
+		// 	System.out.print(row%10+"  ");
+		// 	for (int col=0; col<15; col++) {
 
-			// 		Bloque temp = getBlock(row,col);
-			// 		if (temp == null) {
-			// 			System.out.print("  ");
-			// 		}
-			// 		else if( temp instanceof BloqueColor)
-			// 		{
-			// 			BloqueColor temp2 = (BloqueColor)temp;
-			// 			System.out.print(temp2.getColor()+" ");
-			// 		}
-			// 		else if (temp instanceof BloqueComodin) 
-			// 		{
-			// 			System.out.print("& ");
-			// 		}
-			// 	}
-			// 	System.out.println(" "+row%10);
-			// }
-			// System.out.println("\n   0 1 2 3 4 5 6 7 8 9 0 1 2 3 4");
+		// 		Bloque temp = getBlock(row,col);
+		// 		if (temp == null) {
+		// 			System.out.print("  ");
+		// 		}
+		// 		else if( temp instanceof BloqueColor)
+		// 		{
+		// 			BloqueColor temp2 = (BloqueColor)temp;
+		// 			System.out.print(temp2.getColor()+" ");
+		// 		}
+		// 		else if (temp instanceof BloqueComodin) 
+		// 		{
+		// 			System.out.print("& ");
+		// 		}
+		// 	}
+		// 	System.out.println(" "+row%10);
+		// }
+		// System.out.println("\n   0 1 2 3 4 5 6 7 8 9 0 1 2 3 4");
 
-			// System.out.print("Te quedan R: "+this.meta[0]);
-			// System.out.print(", B: "+this.meta[1]);
-			// System.out.print(", O: "+this.meta[2]);
-			// System.out.print(", G: "+this.meta[3]);
-			// System.out.println(", Y: "+this.meta[4]);
+		// System.out.print("Te quedan R: "+this.meta[0]);
+		// System.out.print(", B: "+this.meta[1]);
+		// System.out.print(", O: "+this.meta[2]);
+		// System.out.print(", G: "+this.meta[3]);
+		// System.out.println(", Y: "+this.meta[4]);
 
-			try{
-				Thread.sleep(time);
-			}catch ( InterruptedException e){
-				System.out.print("No se puede esperar");
-			}
-			painting = false;
+		try{
+			Thread.sleep(time);
+		}catch ( InterruptedException e){
+			System.out.print("No se puede esperar");
 		}
+		painting = false;
 	}
 
 	public Bloque bloqueRandom(){
