@@ -34,7 +34,7 @@ public class Board{
 		this.window = new Interface();
 		this.row = this.col = -1;
 		this.painting = false;
-		this.time = 100;
+		this.time = 0;
 		handleClick(this.window.main, true);
 	}
 
