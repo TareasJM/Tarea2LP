@@ -55,8 +55,8 @@ public class Board{
 				if( temp instanceof BloqueColor && tempr1 instanceof BloqueColor && tempr2 instanceof BloqueColor)
 				{
 					BloqueColor temp2 = (BloqueColor)temp;
-					BLoqueColor temp3 = (BloqueColor)tempr1;
-					BLoqueColor temp4 = (BloqueColor)tempr2;
+					BloqueColor temp3 = (BloqueColor)tempr1;
+					BloqueColor temp4 = (BloqueColor)tempr2;
 				
 					if( temp2.getColor().equals(temp3.getColor()) && temp2.getColor().equals(temp4.getColor()))
 						{
@@ -66,8 +66,8 @@ public class Board{
 				else if(temp instanceof BloqueColor && tempc1 instanceof BloqueColor && tempc2 instanceof BloqueColor)
 				{
 					BloqueColor temp2 = (BloqueColor)temp;
-					BLoqueColor temp3 = (BloqueColor)tempc1;
-					BLoqueColor temp4 = (BloqueColor)tempc2;	
+					BloqueColor temp3 = (BloqueColor)tempc1;
+					BloqueColor temp4 = (BloqueColor)tempc2;	
 
 					if( temp2.getColor().equals(temp3.getColor()) && temp2.getColor().equals(temp4.getColor()))
 						{
@@ -88,8 +88,8 @@ public class Board{
 				if( temp instanceof BloqueColor && tempr1 instanceof BloqueColor && tempr2 instanceof BloqueColor)
 				{
 					BloqueColor temp2 = (BloqueColor)temp;
-					BLoqueColor temp3 = (BloqueColor)tempr1;
-					BLoqueColor temp4 = (BloqueColor)tempr2;
+					BloqueColor temp3 = (BloqueColor)tempr1;
+					BloqueColor temp4 = (BloqueColor)tempr2;
 				
 					if( temp2.getColor().equals(temp3.getColor()) && temp2.getColor().equals(temp4.getColor()))
 						{
@@ -110,8 +110,8 @@ public class Board{
 				if( temp instanceof BloqueColor && tempr1 instanceof BloqueColor && tempr2 instanceof BloqueColor)
 				{
 					BloqueColor temp2 = (BloqueColor)temp;
-					BLoqueColor temp3 = (BloqueColor)tempr1;
-					BLoqueColor temp4 = (BloqueColor)tempr2;
+					BloqueColor temp3 = (BloqueColor)tempr1;
+					BloqueColor temp4 = (BloqueColor)tempr2;
 				
 					if( temp2.getColor().equals(temp3.getColor()) && temp2.getColor().equals(temp4.getColor()))
 						{
@@ -124,8 +124,8 @@ public class Board{
 					{
 
 						BloqueColor temp2 = (BloqueColor)temp;
-						BLoqueColor temp3 = (BloqueColor)tempr1;
-						BLoqueColor temp4 = (BloqueColor)tempr2;
+						BloqueColor temp3 = (BloqueColor)tempr1;
+						BloqueColor temp4 = (BloqueColor)tempr2;
 					
 						if( temp2.getColor().equals(temp3.getColor()) && temp2.getColor().equals(temp4.getColor()))
 							{
@@ -133,12 +133,11 @@ public class Board{
 							}
 						return false;
 					}
-					return false;	
 				}
 			
 			}
 		}
-
+		return false;
 	}
 
 	public void setBlock(int row, int col, Bloque bloque){
