@@ -699,7 +699,7 @@ public class Board{
 				try {
 					java.applet.AudioClip bite =
 					java.applet.Applet.newAudioClip(
-					new java.net.URL("file:///home/jose/Google Drive/Usm/2014-1/LP/Tarea2LP/resources/bite.wav"));
+					new java.net.URL("file://"+System.getProperty("user.dir")+"/resources/bite.wav"));
 					bite.play();
 				} catch (java.net.MalformedURLException murle) {
 					System.out.println(murle);
@@ -808,9 +808,9 @@ public class Board{
 		board.fillBoard();
  		board.checkBoard();
  		board.setMeta(meta);
- 		board.initializing = false;
  		board.showBoard(1);
  		board.setTime(100);
+ 		board.initializing = false;
 		while(!board.getDone()){
 
 	 		board.showBoard(1);
