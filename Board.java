@@ -699,7 +699,7 @@ public class Board{
 				try {
 					java.applet.AudioClip bite =
 					java.applet.Applet.newAudioClip(
-					new java.net.URL("file:///home/salinas/Documents/USM/Tareas/LP2/Tarea2LP2/resources/bite.wav"));
+					new java.net.URL("file://"+System.getProperty("user.dir")+"/resources/bite.wav"));
 					bite.play();
 				} catch (java.net.MalformedURLException murle) {
 					System.out.println(murle);
@@ -808,12 +808,15 @@ public class Board{
 		board.fillBoard();
  		board.checkBoard();
  		board.setMeta(meta);
- 		board.initializing = false;
  		board.showBoard(1);
  		board.setTime(100);
- 		board.showBoard(1);
+ 		board.initializing = false;
 		while(!board.getDone()){
 
+			if(board.checkMoves() == false)
+			{
+				JOptionPane.showMessageDialog(null,"No hay mas movimientos");
+			}
 	 		board.showBoard(1);
 			if(!board.painting){
 				try{
@@ -827,7 +830,7 @@ public class Board{
 				}
 			}
 		}
-		JOptionPane.showMessageDialog(null,"Ganaste CHANCHO CRASH");
+		JOptionPane.showMessageDialog(null,"Ganaste Chancho Crash");
 		board.window.close();
 	}
 }
