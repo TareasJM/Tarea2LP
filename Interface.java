@@ -8,7 +8,6 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
 
-
 class Interface extends JFrame
 {
     public JPanel main;
@@ -73,6 +72,7 @@ class Interface extends JFrame
         }
 
         pack();
+
         setVisible(true);
         paiting = false;
     }
@@ -137,27 +137,27 @@ class Interface extends JFrame
     }       
     
 
-public class JBackgroundPanel extends JPanel {
-  private BufferedImage img;
-  private int color;
- 
-  public void setBackgroundPanel(BufferedImage img) {
-    this.img = img;
-  }
+    public class JBackgroundPanel extends JPanel {
+		private BufferedImage img;
+		private int color;
 
-  public int getColor(){
-    return this.color;
-  }
+		public void setBackgroundPanel(BufferedImage img) {
+			this.img = img;
+		}
 
-  public void setColor(int color){
-    this.color = color;
-  }
- 
-  @Override
-  protected void paintComponent(Graphics g) {
-    super.paintComponent(g);
-    g.drawImage(img, 0, 0, 30, 30, null);
-  }
-}
+		public int getColor(){
+			return this.color;
+		}
+
+		public void setColor(int color){
+			this.color = color;
+		}
+
+		@Override
+			protected void paintComponent(Graphics g) {
+			super.paintComponent(g);
+			g.drawImage(img, 0, 0, 30, 30, null);
+		}
+    }
 
 }

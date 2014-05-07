@@ -264,6 +264,16 @@ public class Board{
 			setBlock(row, col, temp2);
 			setBlock(newRow, newCol, temp1);
 			showBoard(1);
+
+			try {
+				java.applet.AudioClip clip =
+				java.applet.Applet.newAudioClip(
+				new java.net.URL("file:///home/jose/Google Drive/Usm/2014-1/LP/Tarea2LP/resources/test.wav"));
+				clip.play();
+			} catch (java.net.MalformedURLException murle) {
+				System.out.println(murle);
+			}
+
 			int destroyed = checkBoard();
 
 			if (destroyed == 0) {
