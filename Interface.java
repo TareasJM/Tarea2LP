@@ -24,6 +24,13 @@ class Interface extends JFrame
 	public boolean paiting;
     JLabel caca;
 
+    /******** Funcion: Nombre_Funcion **************
+    Descripcion: Funcion en cargada de...
+    Parametros:
+    n1 entero
+    n2 entero
+    Retorno: Retorna...
+    ************************************************/
     public Interface()
     {
     	row = col = -1;
@@ -77,6 +84,13 @@ class Interface extends JFrame
         paiting = false;
     }
 
+    /******** Funcion: Nombre_Funcion **************
+    Descripcion: Funcion en cargada de...
+    Parametros:
+    n1 entero
+    n2 entero
+    Retorno: Retorna...
+    ************************************************/
     public void updateBoard(Board board)
     {
 
@@ -85,6 +99,13 @@ class Interface extends JFrame
 
     }
 
+    /******** Funcion: Nombre_Funcion **************
+    Descripcion: Funcion en cargada de...
+    Parametros:
+    n1 entero
+    n2 entero
+    Retorno: Retorna...
+    ************************************************/
     public void showBoard()
     {   
         paiting = true;
@@ -132,11 +153,25 @@ class Interface extends JFrame
         
     }
 
+    /******** Funcion: Nombre_Funcion **************
+    Descripcion: Funcion en cargada de...
+    Parametros:
+    n1 entero
+    n2 entero
+    Retorno: Retorna...
+    ************************************************/
     public void close(){
         this.dispose();
     }       
     
 
+    /******** Funcion: Nombre_Funcion **************
+    Descripcion: Funcion en cargada de...
+    Parametros:
+    n1 entero
+    n2 entero
+    Retorno: Retorna...
+    ************************************************/
     public class JBackgroundPanel extends JPanel {
 		private BufferedImage img;
 		private int color;

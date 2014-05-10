@@ -40,6 +40,11 @@ public class Board{
 		this.initializing = true;
 	}
 
+	/******** Funcion: checkMoves **************
+	Descripcion: revisa si queda algun movimiento posible en el tablero
+	Parametros: ninguno
+	Retorno: true-> si hay movimientos, false -> si no
+	************************************************/
 	public boolean checkMoves()
 	{
 		for(int row = 0; row < 15; row++)//iz a derecha ultimo
@@ -316,18 +321,43 @@ public class Board{
 
 	}
 
+	/******** Funcion: setBlock **************
+	Descripcion: se encarga de setear un bloque a cierta posición del tablero
+	Parametros:
+	row entero
+	col entero
+	bloque Bloque
+	Retorno: void
+	************************************************/
 	public void setBlock(int row, int col, Bloque bloque){
 		this.board[row][col] = bloque;
 	}
 
+	/******** Funcion: getBlock **************
+	Descripcion: retorna el bloque en cierta posición del tablero
+	Parametros:
+	row entero
+	col entero
+	Retorno: Bloque
+	************************************************/
 	public Bloque getBlock(int row, int col){
 		return this.board[row][col];
 	}
 
+	/******** Funcion: getEmptyBlocks **************
+	Descripcion: retorna el número de bloques vacios en el tablero
+	Parametros: ninguno
+	Retorno: entero
+	************************************************/
 	public int getEmptyBlocks(){
 		return this.emptyBlocks;
 	}
 
+	/******** Funcion: getDone **************
+	Descripcion: verifica si se ha alcanzado el número de bloques a destruir
+	Parametros: ninguno
+	Retorno: boolean: true -> terminado, false-> aun no
+	************************************************/
 	public boolean getDone(){
 		for (int i = 0; i<5; i++) {
 			if (this.meta[i]>0){
@@ -337,22 +367,53 @@ public class Board{
 		return true;
 	}
 
+	/******** Funcion: getMeta **************
+	Descripcion: retorna cuantos bloques faltan para alcanzar el objetivo
+	Parametros:
+	Retorno: arreglo de enteros, {rojo,naranjo,azul,verde,amarillo}
+	************************************************/
 	public int[] getMeta(){
 		return this.meta;
 	}
 
+	/******** Funcion: setMeta **************
+	Descripcion: setea los bloques a destruir
+	Parametros: 
+	meta arreglo de enteros: {rojo,naranjo,azul,verde,amarillo}
+	Retorno: void
+	************************************************/
 	public void setMeta(int[] meta){
 		this.meta = meta;
 	}
 
+	/******** Funcion: getTime **************
+	Descripcion: Funcion en cargada de...
+	Parametros:
+	n1 entero
+	n2 entero
+	Retorno: Retorna...
+	************************************************/
 	public int getTime(){
 		return this.time;
 	}
 
+	/******** Funcion: setTime **************
+	Descripcion: Funcion en cargada de...
+	Parametros:
+	n1 entero
+	n2 entero
+	Retorno: Retorna...
+	************************************************/
 	public void setTime(int time){
 		this.time = time;
 	}
 
+	/******** Funcion: showBoard **************
+	Descripcion: actualiza el tablero en pantalla
+	Parametros:
+	clear entero: cuando imprime en consola, setea si limpiar la consola antes de imprimir o no
+	Retorno: vois
+	************************************************/
 	public void showBoard(int clear){
 		painting = true;
 		this.window.updateBoard(this);
@@ -401,6 +462,11 @@ public class Board{
 		painting = false;
 	}
 
+	/******** Funcion: bloqueRandom **************
+	Descripcion: genera un bloque al azar
+	Parametros: ninguno
+	Retorno: Bloque generado
+	************************************************/
 	public Bloque bloqueRandom(){
 		Random rand = new Random(); 
 		int number = rand.nextInt(100);
@@ -414,6 +480,11 @@ public class Board{
 		return bloque;
 	}
 
+	/******** Funcion: fillBoard **************
+	Descripcion: rellena los espacios vacios del tablero
+	Parametros: ninguno
+	Retorno: vois
+	************************************************/
 	public void fillBoard(){
 		while(this.emptyBlocks > 0){
 
@@ -433,6 +504,16 @@ public class Board{
 		}
 	}
 
+	/******** Funcion: moveBlock **************
+	Descripcion: hace un cambio temporal entre dos bloques, si no se genera la destruccion de mas bloques,
+	se vuelve al estado original
+	Parametros:
+	row entero
+	newRow entero
+	col entero
+	newCol entero
+	Retorno: void
+	************************************************/
 	public void moveBlock(int row, int col, int newRow, int newCol){
         if((Math.abs(newCol-col) == 1 && newRow == row) || (Math.abs(newRow-row) == 1 && newCol == col))
         {
@@ -464,6 +545,12 @@ public class Board{
 		}
 	}
 
+	/******** Funcion: destroyCol **************
+	Descripcion: destruye la columna entera en el tablero (Hability T2)
+	Parametros:
+	col entero
+	Retorno: void
+	************************************************/
 	private void destroyCol(int col){
 		for (int i = 0 ; i<15; i++) {
 
@@ -495,6 +582,12 @@ public class Board{
 		showBoard(1);
 	}
 
+	/******** Funcion: Nombre_Funcion **************
+	Descripcion: destruye la fila entera en el tablero (Hability T1)
+	Parametros:
+	row entero
+	Retorno: void
+	************************************************/
 	private void destroyRow(int row){
 		for (int i = 0 ; i<15; i++) {
 			Bloque temp = getBlock(row, i);
@@ -526,6 +619,12 @@ public class Board{
 		showBoard(1);
 	}
 
+	/******** Funcion: checkCol **************
+	Descripcion: revisa si hay bloques para destruir en la columna
+	Parametros:
+	col entero
+	Retorno: entero: número de bloques destruidos
+	************************************************/
 	private int checkCol(int col){
 		int destroyed = 0;
 		int adjoining = 1;
@@ -600,6 +699,12 @@ public class Board{
 		return destroyed;
 	}
 
+	/******** Funcion: checkRow **************
+	Descripcion: revisa si hay bloques para destruir en la fila
+	Parametros:
+	row entero
+	Retorno: entero: número de bloques destruidos
+	************************************************/
 	private int checkRow(int row){
 		int destroyed = 0;
 		int adjoining = 1;
@@ -674,6 +779,11 @@ public class Board{
 		return destroyed;
 	}
 
+	/******** Funcion: destroyCheck **************
+	Descripcion: vacia los cuadros destruidos del tablero
+	Parametros: ninguno
+	Retorno: void
+	************************************************/
 	private void destroyCheck(){
 		boolean destroyed = false;
 		for (int row=0; row<15; row++) {
@@ -710,6 +820,11 @@ public class Board{
 		}
 	}
 
+	/******** Funcion:checkBoard **************
+	Descripcion: revisa si hay bloques por destruir en el tablero, usando checkCol y checkRow
+	Parametros: ninguno
+	Retorno: entero: bloques destruidos
+	************************************************/
 	public int checkBoard(){
 		int destroyed = 0;
 		int destTemp = 0;
@@ -744,6 +859,13 @@ public class Board{
 		return destroyed;
 	}
 
+	/******** Funcion: handleClick **************
+	Descripcion: lee los click desde la interfaz y los imprime en consola
+	Parametros:
+	i JPanel
+	boolean add
+	Retorno: void
+	************************************************/
 	public void handleClick(JPanel i, boolean add)
 	{
     	final Board b = this;
@@ -777,6 +899,11 @@ public class Board{
 		}
     }
 
+	/******** Funcion: read **************
+	Descripcion: lee los clicks desde consola
+	Parametros: ninguno
+	Retorno: arreglo de enteros: {clickX, clickY}
+	************************************************/
  	static String[] read() throws IOException{
 			
 
@@ -792,6 +919,12 @@ public class Board{
     }
 
 
+	/******** Funcion: main **************
+	Descripcion: funcion principal del juego, lo inicializa y ejecuta
+	Parametros:
+	args arreglo de String
+	Retorno: void
+	************************************************/
 	public static void main(String[] args){
 		String[] click;
 		int[] oldClick = new int[] {0,0};
