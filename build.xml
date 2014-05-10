@@ -1,0 +1,55 @@
+<project name="Tarea2LP" basedir="." default="main">
+
+    <property name="src.dir"     value="src"/>
+    <property name="classes.dir" value="classes"/>
+    <property name="jar.dir"     value="jar"/>
+    <property name="main-class"  value="Board"/>
+
+    <target name="compile">
+        <mkdir dir="${classes.dir}"/>
+        <javac srcdir="${src.dir}" destdir="${classes.dir}"/>
+    </target>
+
+    <target name="jar" depends="compile">
+        <mkdir dir="${jar.dir}"/>
+        <jar destfile="${jar.dir}/${ant.project.name}.jar" basedir="${classes.dir}">
+            <manifest>
+                <attribute name="Main-Class" value="${main-class}"/>
+            </manifest>
+        </jar>
+    </target>
+
+    <target name="run" depends="jar">
+       
+        <java jar="${jar.dir}/${ant.project.name}.jar" fork="true"/>
+    </target>
+
+    <target name="clean" depends="compile">
+        <delete dir="${classes.dir}"/>
+    </target>
+
+    <target name="main" depends="run"/>
+
+</project>
+
+
+<!-- 
+<?xml version="1.0"?>
+<project name="Tarea2LP" default="todo">
+
+   <target name="todo" depends="empaqueta">
+   </target>
+
+   <target name="empaqueta" depends="compila">
+      <jar destfile="../jar/fichero.jar" includes="../class/**/*.class"/>
+   </target>
+
+   <target name="compila" >
+      <javac includeantruntime="false" srcdir="." destdir="../class"/>
+   </target>
+
+   <target name="ejecutar" depends="compila">
+      <java classname="Board"/>
+   </target>
+
+</project> -->
