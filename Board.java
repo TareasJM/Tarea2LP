@@ -413,22 +413,19 @@ public class Board{
 	}
 
 	/******** Funcion: getConsoleMode **************
-	Descripcion: Funcion en cargada de...
-	Parametros:
-	n1 entero
-	n2 entero
-	Retorno: Retorna...
+	Descripcion: retorna si esta en modo consola o no
+	Parametros:ninguno
+	Retorno: Boolean
 	*****************************************************************************************************************************/
 	public boolean getConsoleMode(){
 		return this.consoleMode;
 	}
 
 	/******** Funcion: setConsoleMode **************
-	Descripcion: Funcion en cargada de...
+	Descripcion: setea si se activa el modo consola.
 	Parametros:
-	n1 entero
-	n2 entero
-	Retorno: Retorna...
+	cm boolean
+	Retorno: void
 	*****************************************************************************************************************************/
 	public void setConsoleMode(boolean cm){
 		this.consoleMode = cm;
@@ -964,21 +961,22 @@ public class Board{
 		if (args.length == 1 && args[0].equals("-c")) {
 			board = new Board(true);	
 		}
-		else{
-			board  = new Board(false);
-		}
-
-		if(args.length == 5){
-			for(int i=0; i < 5; i++){
-				meta[i] = Integer.parseInt(args[i]);
-			}
-		}
 		else if(args.length == 6 && args[0].equals("-c")){
-			board.setConsoleMode(true);
+			board = new Board(true);	
 			for(int i=1; i < 6; i++){
 				meta[i-1] = Integer.parseInt(args[i]);
 			}
 		}
+		else if(args.length == 5){
+			board  = new Board(false);
+			for(int i=0; i < 5; i++){
+				meta[i] = Integer.parseInt(args[i]);
+			}
+		}
+		else{
+			board  = new Board(false);
+		}
+
 		board.fillBoard();
  		board.checkBoard();
  		board.setMeta(meta);
