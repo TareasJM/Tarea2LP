@@ -1,9 +1,20 @@
 <project name="Tarea2LP" basedir="." default="main">
 
-    <property name="src.dir"     value="src"/>
+        <property name="src.dir"     value="src"/>
     <property name="classes.dir" value="classes"/>
     <property name="jar.dir"     value="jar"/>
     <property name="main-class"  value="Board"/>
+
+    <property name="prop1" value="1"/>
+    <property name="prop2" value="2"/>
+    <property name="prop3" value="3"/>
+    <property name="prop4" value="4"/>
+    <property name="prop5" value="5"/>
+
+    <target name="clean">
+        <delete dir="${classes.dir}"/>
+        <delete dir="${jar.dir}"/>
+    </target>
 
     <target name="compile">
         <mkdir dir="${classes.dir}"/>
@@ -20,12 +31,13 @@
     </target>
 
     <target name="run" depends="jar">
-       
-        <java jar="${jar.dir}/${ant.project.name}.jar" fork="true"/>
-    </target>
-
-    <target name="clean" depends="compile">
-        <delete dir="${classes.dir}"/>
+        <java jar="${jar.dir}/${ant.project.name}.jar" fork="true">
+          <!-- <arg value="${arg1}"/>
+          <arg value="${arg2}"/>
+          <arg value="${arg3}"/>
+          <arg value="${arg4}"/>
+          <arg value="${arg5}"/> para ponerle meta por terminal -Drag1=1000 -Drag2=... -->
+        </java>
     </target>
 
     <target name="main" depends="run"/>
