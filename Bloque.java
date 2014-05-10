@@ -1,11 +1,9 @@
 public class Bloque{
 
-	/******** Funcion: Nombre_Funcion **************
-	Descripcion: Funcion en cargada de...
-	Parametros:
-	n1 entero
-	n2 entero
-	Retorno: Retorna...
+	/******** Funcion: DestruirBloque **************
+	Descripcion: destruye bloque
+	Parametros: ninguno
+	Retorno: entero -1
 	************************************************/
 	public int DestruirBloque(){
 		return -1;

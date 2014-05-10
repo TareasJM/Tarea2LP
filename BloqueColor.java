@@ -3,13 +3,11 @@ public class BloqueColor extends Bloque{
 	
 	private String color;
 	
-	/******** Funcion: Nombre_Funcion **************
-	Descripcion: Funcion en cargada de...
-	Parametros:
-	n1 entero
-	n2 entero
-	Retorno: Retorna...
-	************************************************/
+	/******** Funcion: BloqueColor ********************************************************************
+	Descripcion: Constructor que genera un bloque de color aleatorio
+	Parametros: ninguno
+	Retorno: Bloque
+	***************************************************************************************************/
 	public BloqueColor(){
 		Random rand = new Random(); 
 		int number = rand.nextInt(5);
@@ -30,24 +28,20 @@ public class BloqueColor extends Bloque{
 		}
 	}
 
-	/******** Funcion: Nombre_Funcion **************
-	Descripcion: Funcion en cargada de...
-	Parametros:
-	n1 entero
-	n2 entero
-	Retorno: Retorna...
-	************************************************/
+	/******** Funcion: getColor ***********************************************************************
+	Descripcion: retorna el color de este bloque
+	Parametros: ninguno
+	Retorno: String
+	***************************************************************************************************/
 	public String getColor(){
 		return this.color;
 	}
 
-	/******** Funcion: Nombre_Funcion **************
-	Descripcion: Funcion en cargada de...
-	Parametros:
-	n1 entero
-	n2 entero
-	Retorno: Retorna...
-	************************************************/
+	/******** Funcion: DestruirBloque *****************************************************************
+	Descripcion: destruye el bloque y setea el color a * para su posterior eliminación en el tablero
+	Parametros: ninguno
+	Retorno: entero
+	***************************************************************************************************/
 	public int DestruirBloque(){
 		this.color = "*";
 		return 0;

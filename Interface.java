@@ -24,12 +24,10 @@ class Interface extends JFrame
 	public boolean paiting;
     JLabel caca;
 
-    /******** Funcion: Nombre_Funcion **************
-    Descripcion: Funcion en cargada de...
-    Parametros:
-    n1 entero
-    n2 entero
-    Retorno: Retorna...
+    /******** Funcion: Interface **************
+    Descripcion: Constructor que inicializa la interfaz
+    Parametros: ninguno
+    Retorno: Interface
     ************************************************/
     public Interface()
     {
@@ -84,12 +82,11 @@ class Interface extends JFrame
         paiting = false;
     }
 
-    /******** Funcion: Nombre_Funcion **************
-    Descripcion: Funcion en cargada de...
+    /******** Funcion: updateBoard **************
+    Descripcion: actualiza la Board de la interfaz
     Parametros:
-    n1 entero
-    n2 entero
-    Retorno: Retorna...
+    board Board
+    Retorno: void
     ************************************************/
     public void updateBoard(Board board)
     {
@@ -99,12 +96,10 @@ class Interface extends JFrame
 
     }
 
-    /******** Funcion: Nombre_Funcion **************
-    Descripcion: Funcion en cargada de...
-    Parametros:
-    n1 entero
-    n2 entero
-    Retorno: Retorna...
+    /******** Funcion: showBoard **************
+    Descripcion: actualiza la interfaz respecto a Board
+    Parametros: ninguno
+    Retorno: void
     ************************************************/
     public void showBoard()
     {   
@@ -153,24 +148,18 @@ class Interface extends JFrame
         
     }
 
-    /******** Funcion: Nombre_Funcion **************
-    Descripcion: Funcion en cargada de...
-    Parametros:
-    n1 entero
-    n2 entero
-    Retorno: Retorna...
+    /******** Funcion: close **************
+    Descripcion: finaliza la interfaz, cierra la ventana
+    Parametros: ninguno
+    Retorno: void
     ************************************************/
     public void close(){
         this.dispose();
     }       
     
 
-    /******** Funcion: Nombre_Funcion **************
-    Descripcion: Funcion en cargada de...
-    Parametros:
-    n1 entero
-    n2 entero
-    Retorno: Retorna...
+    /******** clase: JBackground **************
+    Descripcion: permite poner imagenes como color de bloques.
     ************************************************/
     public class JBackgroundPanel extends JPanel {
 		private BufferedImage img;

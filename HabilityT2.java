@@ -1,11 +1,9 @@
 public class HabilityT2 implements HabilityBehavior{
 
-	/******** Funcion: Nombre_Funcion **************
-	Descripcion: Funcion en cargada de...
-	Parametros:
-	n1 entero
-	n2 entero
-	Retorno: Retorna...
+	/******** Funcion:Hability **************
+	Descripcion: retorna 2 que en Board significa eliminacion de la columna
+	Parametros: ninguno
+	Retorno: entero
 	************************************************/
 	public int Hability(){
 		return 2;

@@ -14,24 +14,20 @@ public class BloqueComodin extends Bloque implements HabilityBehavior{
 		}
 	}
 
-	/******** Funcion: Nombre_Funcion **************
-	Descripcion: Funcion en cargada de...
-	Parametros:
-	n1 entero
-	n2 entero
-	Retorno: Retorna...
-	************************************************/
+	/******** Funcion:Hability ***************************************************
+	Descripcion: llama a la habilidad de la interfaz HabilityBehavior
+	Parametros: ninguno
+	Retorno: entero
+	******************************************************************************/
 	public int Hability(){
 		return habilidad.Hability();
 	}
 
-	/******** Funcion: Nombre_Funcion **************
-	Descripcion: Funcion en cargada de...
-	Parametros:
-	n1 entero
-	n2 entero
-	Retorno: Retorna...
-	************************************************/
+	/******** Funcion: DestruirBloque ********************************************
+	Descripcion: Destruye el bloque comodin y retorna el valor de la habilidad
+	Parametros: ninguno
+	Retorno: entero
+	******************************************************************************/
 	public int DestruirBloque(){
 		return Hability();
 	}
