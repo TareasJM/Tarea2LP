@@ -22,8 +22,9 @@ public class Board{
 	private int col,row;
 	private boolean painting;
 	private boolean initializing;
+	private boolean consoleMode;
 
-	public Board(){
+	public Board(boolean cm){
 		this.meta = new int[] {0,0,0,0,0};
 		this.board = new Bloque[15][15]; //[y][x] -> [rows][cols]
 		for (int row=0; row<15; row++) {
@@ -32,11 +33,14 @@ public class Board{
 			}
 		}
 		this.emptyBlocks = 225;
-		this.window = new Interface();
 		this.row = this.col = -1;
 		this.painting = false;
 		this.time = 0;
-		handleClick(this.window.main, true);
+		this.consoleMode = cm;
+		if(!cm){
+			this.window = new Interface();
+			handleClick(this.window.main, true);
+		}
 		this.initializing = true;
 	}
 
@@ -408,6 +412,28 @@ public class Board{
 		this.time = time;
 	}
 
+	/******** Funcion: getConsoleMode **************
+	Descripcion: Funcion en cargada de...
+	Parametros:
+	n1 entero
+	n2 entero
+	Retorno: Retorna...
+	*****************************************************************************************************************************/
+	public boolean getConsoleMode(){
+		return this.consoleMode;
+	}
+
+	/******** Funcion: setConsoleMode **************
+	Descripcion: Funcion en cargada de...
+	Parametros:
+	n1 entero
+	n2 entero
+	Retorno: Retorna...
+	*****************************************************************************************************************************/
+	public void setConsoleMode(boolean cm){
+		this.consoleMode = cm;
+	}
+
 	/******** Funcion: showBoard **************
 	Descripcion: actualiza el tablero en pantalla
 	Parametros:
@@ -416,43 +442,46 @@ public class Board{
 	*****************************************************************************************************************************/
 	public void showBoard(int clear){
 		painting = true;
-		this.window.updateBoard(this);
-		// this.window.showBoard();
 		
-		// if (clear > 0) {
-		// 	System.out.print("\033[H\033[2J");
-		// 	System.out.flush();
-		// }else{
-		// 	System.out.print("\n");
-		// }
-		// System.out.println("   0 1 2 3 4 5 6 7 8 9 0 1 2 3 4\n");
-		// for (int row=0; row<15; row++) {
-		// 	System.out.print(row%10+"  ");
-		// 	for (int col=0; col<15; col++) {
+		if (this.getConsoleMode()) {	
+			if (clear > 0) {
+				System.out.print("\033[H\033[2J");
+				System.out.flush();
+			}else{
+				System.out.print("\n");
+			}
+			System.out.println("   0 1 2 3 4 5 6 7 8 9 0 1 2 3 4\n");
+			for (int row=0; row<15; row++) {
+				System.out.print(row%10+"  ");
+				for (int col=0; col<15; col++) {
 
-		// 		Bloque temp = getBlock(row,col);
-		// 		if (temp == null) {
-		// 			System.out.print("  ");
-		// 		}
-		// 		else if( temp instanceof BloqueColor)
-		// 		{
-		// 			BloqueColor temp2 = (BloqueColor)temp;
-		// 			System.out.print(temp2.getColor()+" ");
-		// 		}
-		// 		else if (temp instanceof BloqueComodin) 
-		// 		{
-		// 			System.out.print("& ");
-		// 		}
-		// 	}
-		// 	System.out.println(" "+row%10);
-		// }
-		// System.out.println("\n   0 1 2 3 4 5 6 7 8 9 0 1 2 3 4");
+					Bloque temp = getBlock(row,col);
+					if (temp == null) {
+						System.out.print("  ");
+					}
+					else if( temp instanceof BloqueColor)
+					{
+						BloqueColor temp2 = (BloqueColor)temp;
+						System.out.print(temp2.getColor()+" ");
+					}
+					else if (temp instanceof BloqueComodin) 
+					{
+						System.out.print("& ");
+					}
+				}
+				System.out.println(" "+row%10);
+			}
+			System.out.println("\n   0 1 2 3 4 5 6 7 8 9 0 1 2 3 4");
 
-		// System.out.print("Te quedan R: "+this.meta[0]);
-		// System.out.print(", B: "+this.meta[1]);
-		// System.out.print(", O: "+this.meta[2]);
-		// System.out.print(", G: "+this.meta[3]);
-		// System.out.println(", Y: "+this.meta[4]);
+			System.out.print("Te quedan R: "+this.meta[0]);
+			System.out.print(", B: "+this.meta[1]);
+			System.out.print(", O: "+this.meta[2]);
+			System.out.print(", G: "+this.meta[3]);
+			System.out.println(", Y: "+this.meta[4]);
+		}
+		else{
+			this.window.updateBoard(this);
+		}
 
 		try{
 			Thread.sleep(time);
@@ -930,14 +959,26 @@ public class Board{
 		int[] oldClick = new int[] {0,0};
 		int[] meta = {100,100,100,100,100};
 
-		if(args.length == 5)
-		{
-			for(int i=0; i < 5; i++)
-			{
+		Board board;
+
+		if (args.length == 1 && args[0].equals("-c")) {
+			board = new Board(true);	
+		}
+		else{
+			board  = new Board(false);
+		}
+
+		if(args.length == 5){
+			for(int i=0; i < 5; i++){
 				meta[i] = Integer.parseInt(args[i]);
 			}
 		}
-		Board board = new Board();
+		else if(args.length == 6 && args[0].equals("-c")){
+			board.setConsoleMode(true);
+			for(int i=1; i < 6; i++){
+				meta[i-1] = Integer.parseInt(args[i]);
+			}
+		}
 		board.fillBoard();
  		board.checkBoard();
  		board.setMeta(meta);
@@ -952,14 +993,26 @@ public class Board{
 			}
 	 		board.showBoard(1);
 			if(!board.painting){
-				try{
-					click = read();
-					board.moveBlock(oldClick[0],oldClick[1],Integer.parseInt(click[0]),Integer.parseInt(click[1]));
-					oldClick[0] = Integer.parseInt(click[0]);
-					oldClick[1] = Integer.parseInt(click[1]);
-				}
-				catch(IOException e){
-					
+				if (board.getConsoleMode()) {
+		 			Console console = System.console();
+					String input = console.readLine("Ingrese movimiento\nEj: row1-col1 row2-col2:\n");
+					String[] bloques = input.split(" ");
+					int row1 = Integer.parseInt(bloques[0].split("-")[0]);
+					int col1 = Integer.parseInt(bloques[0].split("-")[1]);
+					int row2 = Integer.parseInt(bloques[1].split("-")[0]);
+					int col2 = Integer.parseInt(bloques[1].split("-")[1]);
+					board.moveBlock(row1,col1,row2,col2);	
+		 		}
+				else{
+					try{
+						click = read();
+						board.moveBlock(oldClick[0],oldClick[1],Integer.parseInt(click[0]),Integer.parseInt(click[1]));
+						oldClick[0] = Integer.parseInt(click[0]);
+						oldClick[1] = Integer.parseInt(click[1]);
+					}
+					catch(IOException e){
+						
+					}
 				}
 			}
 		}
