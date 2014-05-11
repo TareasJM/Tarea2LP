@@ -4,12 +4,11 @@
     <property name="classes.dir" value="classes"/>
     <property name="jar.dir"     value="jar"/>
     <property name="main-class"  value="Board"/>
-
-    <property name="prop1" value="1"/>
-    <property name="prop2" value="2"/>
-    <property name="prop3" value="3"/>
-    <property name="prop4" value="4"/>
-    <property name="prop5" value="5"/>
+    <property name="arg0" value=""/>
+    <property name="arg1" value=""/>
+    <property name="arg2" value=""/>
+    <property name="arg3" value=""/>
+    <property name="arg4" value=""/>
 
     <target name="clean">
         <delete dir="${classes.dir}"/>
@@ -32,11 +31,11 @@
 
     <target name="run" depends="jar">
         <java jar="${jar.dir}/${ant.project.name}.jar" fork="true">
-          <!-- <arg value="${arg0}"/>
-          <arg value="${arg1}"/>
-          <arg value="${arg2}"/>
-          <arg value="${arg3}"/>
-          <arg value="${arg4}"/>  -->
+            <arg value="${arg0}"/>
+            <arg value="${arg1}"/>
+            <arg value="${arg2}"/>
+            <arg value="${arg3}"/>
+            <arg value="${arg4}"/>
         </java>
     </target>
 
