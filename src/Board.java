@@ -832,13 +832,16 @@ public class Board{
 		}
 		if (destroyed) {
 			if (!this.initializing) {
-				try {
-					java.applet.AudioClip bite =
-					java.applet.Applet.newAudioClip(
-					new java.net.URL("file://"+System.getProperty("user.dir")+"/resources/bite.wav"));
-					bite.play();
-				} catch (java.net.MalformedURLException murle) {
-					System.out.println(murle);
+				if(!this.getConsoleMode())
+				{
+					try {
+						java.applet.AudioClip bite =
+						java.applet.Applet.newAudioClip(
+						new java.net.URL("file://"+System.getProperty("user.dir")+"/resources/bite.wav"));
+						bite.play();
+					} catch (java.net.MalformedURLException murle) {
+						System.out.println(murle);
+					}
 				}
 			}
 			showBoard(1);
@@ -957,26 +960,48 @@ public class Board{
 		int[] meta = {100,100,100,100,100};
 
 		Board board;
-
-		if (args.length == 1 && args[0].equals("-c")) {
-			board = new Board(true);	
-		}
-		else if(args.length == 6 && args[0].equals("-c")){
-			board = new Board(true);	
-			for(int i=1; i < 6; i++){
-				meta[i-1] = Integer.parseInt(args[i]);
+				
+		if(args[0].equals("c"))
+		{	
+			board  = new Board(true);
+			for(int i=0;i<5;i++)
+			{	
+				if(!args[i+1].equals(""))
+				{
+					meta[i]=Integer.parseInt(args[i+1]);
+				}
 			}
 		}
-		else if(args.length == 5){
+		else 
+		{
 			board  = new Board(false);
-			for(int i=0; i < 5; i++){
-				meta[i] = Integer.parseInt(args[i]);
+			for(int i=0;i<5;i++)
+			{	
+				if(!args[i+1].equals(""))
+				{
+					meta[i]=Integer.parseInt(args[i+1]);
+				}
 			}
 		}
-		else{
-			board  = new Board(false);
-		}
 
+		// if (args.length == 1 && args[0].equals("-c")) {
+		// 	board = new Board(true);	
+		// }
+		// else if(args.length == 6 && args[0].equals("-c")){
+		// 	board = new Board(true);	
+		// 	for(int i=1; i < 6; i++){
+		// 		meta[i-1] = Integer.parseInt(args[i]);
+		// 	}
+		// }
+		// else if(args.length == 5){
+		// 	board  = new Board(false);
+		// 	for(int i=0; i < 5; i++){
+		// 		meta[i] = Integer.parseInt(args[i]);
+		// 	}
+		// }
+		// else{
+		// 	board  = new Board(false);
+		// }
 		board.fillBoard();
  		board.checkBoard();
  		board.setMeta(meta);
