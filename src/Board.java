@@ -960,7 +960,7 @@ public class Board{
 		int[] meta = {100,100,100,100,100};
 
 		Board board;
-				
+		
 		if(args[0].equals("c"))
 		{	
 			board  = new Board(true);

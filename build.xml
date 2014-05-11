@@ -31,18 +31,47 @@
         </jar>
     </target>
 
-    <target name="run" depends="jar">
-        <java classname="Board" classpath="${classes.dir}">
+    <script language="javascript">
+        <![CDATA[
+            importPackage(java.io);
+            importClass(java.io.File);
+            var argument = project.getProperty("arg0");
+            if(argument.equals("c"))
+            {
+                project.executeTarget("runc");
+            }
+            else
+            {
+                project.executeTarget("runi")
+            }
+         ]]>
+        </script> 
+
+    <target name="runi" depends="jar">
+
+        <java jar="${jar.dir}/${ant.project.name}.jar" fork="true">
+        <arg value="${arg0}"/>
+        <arg value="${arg1}"/>
+        <arg value="${arg2}"/>
+        <arg value="${arg3}"/>
+        <arg value="${arg4}"/>
+        <arg value="${arg5}"/>
+
+        </java>
+
+    </target>
+
+    <target name="runc" depends="compile">
+        <java classname="${main-class}" classpath="${classes.dir}">
             <arg value="${arg0}"/>
             <arg value="${arg1}"/>
             <arg value="${arg2}"/>
             <arg value="${arg3}"/>
             <arg value="${arg4}"/>
             <arg value="${arg5}"/>
-
         </java>
     </target>
 
-    <target name="main" depends="run"/>
+    <target name="main" depends="runc"/>
 
 </project>
