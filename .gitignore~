@@ -14,5 +14,3 @@ hs_err_pid*
 
 #bin files folder
 bin
-jar
-classes
