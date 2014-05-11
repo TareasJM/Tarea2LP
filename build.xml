@@ -32,7 +32,7 @@
     </target>
 
     <target name="run" depends="jar">
-        <java jar="${jar.dir}/${ant.project.name}.jar" fork="true">
+        <java classname="Board" classpath="${classes.dir}">
             <arg value="${arg0}"/>
             <arg value="${arg1}"/>
             <arg value="${arg2}"/>
