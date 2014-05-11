@@ -58,8 +58,7 @@
     
     <script language="javascript">
         <![CDATA[
-            importPackage(java.io);
-            importClass(java.io.File);
+ 
             var argument = project.getProperty("arg0");
             if(argument.equals("c"))
             {
